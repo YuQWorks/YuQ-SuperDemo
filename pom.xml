@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>org.example</groupId>
-    <artifactId>YuQ-Mirai-Demo</artifactId>
+    <artifactId>YuQ-SuperDemo</artifactId>
     <version>1.0-SNAPSHOT</version>
 
     <parent>
@@ -24,11 +24,44 @@
     </properties>
 
     <dependencies>
+
         <dependency>
             <groupId>com.IceCreamQAQ.YuQ</groupId>
             <artifactId>YuQ-Mirai</artifactId>
-            <version>0.0.5.1</version>
+            <version>0.0.5.2</version>
         </dependency>
+
+        <dependency>
+            <groupId>com.IceCreamQAQ.Yu</groupId>
+            <artifactId>Yu-DB</artifactId>
+            <version>0.0.1.0</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>mysql</groupId>
+                    <artifactId>mysql-connector-java</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+
+        <dependency>
+            <groupId>com.IceCreamQAQ.Yu</groupId>
+            <artifactId>WebCore</artifactId>
+            <version>0.0.1.1</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>1.18.10</version>
+            <scope>provided</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>com.h2database</groupId>
+            <artifactId>h2</artifactId>
+            <version>1.4.200</version>
+        </dependency>
+
     </dependencies>
 
     <build>

@@ -1,5 +1,6 @@
 package wiki.IceCream.yuq.demo;
 
+import com.IceCreamQAQ.Yu.loader.AppClassloader;
 import com.icecreamqaq.yuq.mirai.YuQMiraiStart;
 
 public class Start {
@@ -10,6 +11,7 @@ public class Start {
      * @param args 启动参数
      */
     public static void main(String[] args) {
+        AppClassloader.registerTransformerList("com.IceCreamQAQ.Yu.web.WebClassTransformer");
         YuQMiraiStart.start(args);
     }
 

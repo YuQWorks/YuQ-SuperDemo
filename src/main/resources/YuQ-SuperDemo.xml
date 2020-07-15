@@ -22,5 +22,13 @@
             timeToIdleSeconds="1800"
     />
 
+    <cache
+            name="MessageSaved"
+            maxElementsInMemory="10000"
+            eternal="false"
+            overflowToDisk="false"
+            timeToLiveSeconds="120"
+    />
+
 
 </ehcache>
