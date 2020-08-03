@@ -7,7 +7,9 @@ import com.icecreamqaq.yuq.YuQ;
 import com.icecreamqaq.yuq.event.GroupMemberRequestEvent;
 import com.icecreamqaq.yuq.event.GroupMessageEvent;
 import com.icecreamqaq.yuq.event.GroupRecallEvent;
+import com.icecreamqaq.yuq.message.Image;
 import com.icecreamqaq.yuq.message.Message;
+import com.icecreamqaq.yuq.message.MessageItem;
 import com.icecreamqaq.yuq.message.MessageItemFactory;
 import lombok.val;
 import wiki.IceCream.yuq.demo.serivce.GroupService;
@@ -32,7 +34,7 @@ public class GroupEvent {
 
     @Event
     public void onGroupMessage(GroupMessageEvent event) {
-        val groupId = event.getMessage().getGroup();
+        val groupId = event.getGroup().getId();
         val message = event.getMessage();
 
         val group = service.getGroupByGroupId(groupId);
@@ -40,17 +42,23 @@ public class GroupEvent {
 
         if (group.getAd()) {
             val ms = message.sourceMessage.toString().toLowerCase();
-            if (!yuq.getGroups().get(message.getGroup()).get(message.getQq()).isAdmin())
+            if (!event.getSender().isAdmin())
                 for (String s : group.getAdKeyList()) {
                     if (ms.contains(s)) {
                         message.recall();
-                        yuq.sendMessage(message.newMessage().plus(mif.at(message.getQq())).plus("请勿群内发布广告！"));
-                        yuq.getGroups().get(message.getGroup()).get(message.getQq()).ban(300);
+                        event.getGroup().sendMessage(new Message().plus(mif.at(event.getSender().getId())).plus("请勿群内发布广告！"));
+                        event.getSender().ban(300);
 
                         event.cancel = true;
                         return;
                     }
                 }
+        }
+
+        for (MessageItem item : event.getMessage().getBody()) {
+            if (item instanceof Image) {
+                val url = ((Image) item).getUrl();
+            }
         }
 
         if (group.getRecall()) {
@@ -74,15 +82,16 @@ public class GroupEvent {
 
     @Event
     public void onGroupRecall(GroupRecallEvent event) {
-        val groupId = event.getGroup();
+        if (event.getSender() != event.getOperator()) return;
+        val groupId = event.getGroup().getId();
 
         val group = service.getGroupByGroupId(groupId);
         if (group == null) return;
 
         if (group.getRecall()) {
             val rm = saves.get(String.valueOf(event.getMessageId()));
-            assert rm != null;
-            yuq.sendMessage(rm.newMessage().plus("群成员：").plus(mif.at(rm.getQq())).plus("\n妄图撤回一条消息。\n消息内容为：\n").plus(rm));
+            if (rm == null) return;
+            event.getGroup().sendMessage(new Message().plus("群成员：").plus(mif.at(event.getOperator().getId())).plus("\n妄图撤回一条消息。\n消息内容为：\n").plus(rm));
         }
     }
 

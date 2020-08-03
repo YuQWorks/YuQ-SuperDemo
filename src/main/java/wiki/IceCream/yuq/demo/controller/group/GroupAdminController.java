@@ -11,6 +11,7 @@ import wiki.IceCream.yuq.demo.entity.QqGroup;
 import wiki.IceCream.yuq.demo.serivce.GroupService;
 
 import javax.inject.Inject;
+import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
 
 @Path("群")
