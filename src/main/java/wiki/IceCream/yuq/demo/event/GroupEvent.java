@@ -4,6 +4,8 @@ import com.IceCreamQAQ.Yu.annotation.Event;
 import com.IceCreamQAQ.Yu.annotation.EventListener;
 import com.IceCreamQAQ.Yu.cache.EhcacheHelp;
 import com.icecreamqaq.yuq.YuQ;
+import com.icecreamqaq.yuq.entity.Contact;
+import com.icecreamqaq.yuq.event.GroupMemberJoinEvent;
 import com.icecreamqaq.yuq.event.GroupMemberRequestEvent;
 import com.icecreamqaq.yuq.event.GroupMessageEvent;
 import com.icecreamqaq.yuq.event.GroupRecallEvent;
@@ -11,6 +13,9 @@ import com.icecreamqaq.yuq.message.Image;
 import com.icecreamqaq.yuq.message.Message;
 import com.icecreamqaq.yuq.message.MessageItem;
 import com.icecreamqaq.yuq.message.MessageItemFactory;
+import com.icecreamqaq.yuq.message.MessageSource;
+import com.icecreamqaq.yuq.mirai.message.MiraiMessageSource;
+import com.sun.corba.se.spi.transport.CorbaContactInfoListFactory;
 import lombok.val;
 import wiki.IceCream.yuq.demo.serivce.GroupService;
 
@@ -32,6 +37,11 @@ public class GroupEvent {
     @Named("MessageSaved")
     private EhcacheHelp<Message> saves;
 
+    /**
+     * 监控群消息
+     *
+     * @param event
+     */
     @Event
     public void onGroupMessage(GroupMessageEvent event) {
         val groupId = event.getGroup().getId();
@@ -67,6 +77,11 @@ public class GroupEvent {
 
     }
 
+    /**
+     * 申请入群事件
+     *
+     * @param event
+     */
     @Event
     public void onNewRequest(GroupMemberRequestEvent event) {
         val groupId = event.getGroup().getId();
@@ -80,6 +95,11 @@ public class GroupEvent {
         }
     }
 
+    /**
+     * 群消息撤回事件
+     *
+     * @param event
+     */
     @Event
     public void onGroupRecall(GroupRecallEvent event) {
         if (event.getSender() != event.getOperator()) return;
@@ -93,6 +113,20 @@ public class GroupEvent {
             if (rm == null) return;
             event.getGroup().sendMessage(new Message().plus("群成员：").plus(mif.at(event.getOperator().getId())).plus("\n妄图撤回一条消息。\n消息内容为：\n").plus(rm));
         }
+    }
+
+    /**
+     * 新成员入群事件
+     *
+     * @param event
+     */
+    @Event
+    public void onGroupMemberJoin(GroupMemberJoinEvent event) {
+        event.getGroup().sendMessage(new Message().plus("欢迎").plus(mif.at(event.getMember().getId())).plus("加入本群~~\n" +
+                "请修改群内备注为:企业/库区-姓名 如XXXX库-张三  \n" +
+                "业务数据中心相关问题可在群内提问。\n" +
+                "群内定期踢除无备注者,以防止不良人员混入\n" +
+                "业务数据中心网址：http://36.7.135.171:10081/outer-web/frameJsp.do"));
     }
 
 }

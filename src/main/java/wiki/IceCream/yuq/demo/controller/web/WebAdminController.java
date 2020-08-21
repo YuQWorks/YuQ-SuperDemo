@@ -19,6 +19,12 @@ public class WebAdminController {
     @Inject
     private GroupService service;
 
+    /**
+     * 发送群消息接口
+     * @param group 群号
+     * @param msg 信息
+     * @return
+     */
     @Action("groupMessage")
     public String groupMessage(String group, String msg) {
         val g = yuq.getGroups().get(Long.parseLong(group));
@@ -27,6 +33,12 @@ public class WebAdminController {
         return "OK!";
     }
 
+    /**
+     * 私信好友 接口
+     * @param qq qq号
+     * @param msg 信息
+     * @return
+     */
     @Action("privMessage")
     public String privMessage(String qq, String msg) {
         val f = yuq.getFriends().get(Long.parseLong(qq));
@@ -35,6 +47,13 @@ public class WebAdminController {
         return "OK!";
     }
 
+    /**
+     * 给群成员发私信
+     * @param qq 群成员QQ号
+     * @param group 群号
+     * @param msg 信息内容
+     * @return
+     */
     @Action("tempMessage")
     public String tempMessage(String qq, String group, String msg) {
         val g = yuq.getGroups().get(Long.parseLong(group));
