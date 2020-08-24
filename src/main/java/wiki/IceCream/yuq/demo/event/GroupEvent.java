@@ -129,7 +129,14 @@ public class GroupEvent {
                     "业务数据中心相关问题可在群内提问。\n" +
                     "群内定期踢除无备注者,以防止不良人员混入\n" +
                     "业务数据中心网址：http://36.7.135.171:10081/outer-web/frameJsp.do"));
-        } else { // 其他
+        } else if (event.getGroup().getId() == 781109951L){ // 信息报送
+            event.getGroup().sendMessage(new Message().plus("欢迎").plus(mif.at(event.getMember().getId())).plus("加入本群~~\n" +
+                    "请修改群内备注为:市/县-姓名 如XXXX市-张三  \n" +
+                    "信息报送相关问题可在群内提问。\n" +
+                    "使用系统前请先下载群文件中的操作手册阅读。\n" +
+                    "信息报送网址：http://172.10.8.2:8080/XTBG/frameJsp.do"));
+
+        }else { // 其他
             event.getGroup().sendMessage(new Message().plus("欢迎").plus(mif.at(event.getMember().getId())).plus("加入本群~~\n"));
         }
 
