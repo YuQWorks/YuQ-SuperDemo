@@ -122,11 +122,17 @@ public class GroupEvent {
      */
     @Event
     public void onGroupMemberJoin(GroupMemberJoinEvent event) {
-        event.getGroup().sendMessage(new Message().plus("欢迎").plus(mif.at(event.getMember().getId())).plus("加入本群~~\n" +
-                "请修改群内备注为:企业/库区-姓名 如XXXX库-张三  \n" +
-                "业务数据中心相关问题可在群内提问。\n" +
-                "群内定期踢除无备注者,以防止不良人员混入\n" +
-                "业务数据中心网址：http://36.7.135.171:10081/outer-web/frameJsp.do"));
+        // 业务数据中心群
+        if (event.getGroup().getId() == 577651387L) {
+            event.getGroup().sendMessage(new Message().plus("欢迎").plus(mif.at(event.getMember().getId())).plus("加入本群~~\n" +
+                    "请修改群内备注为:企业/库区-姓名 如XXXX库-张三  \n" +
+                    "业务数据中心相关问题可在群内提问。\n" +
+                    "群内定期踢除无备注者,以防止不良人员混入\n" +
+                    "业务数据中心网址：http://36.7.135.171:10081/outer-web/frameJsp.do"));
+        } else { // 其他
+            event.getGroup().sendMessage(new Message().plus("欢迎").plus(mif.at(event.getMember().getId())).plus("加入本群~~\n"));
+        }
+
     }
 
 }
