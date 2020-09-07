@@ -8,14 +8,11 @@ import com.icecreamqaq.yuq.entity.Member;
 import com.icecreamqaq.yuq.message.Message;
 import com.icecreamqaq.yuq.message.MessageItemFactory;
 import lombok.val;
-import wiki.IceCream.yuq.demo.serivce.GroupService;
 
 import javax.inject.Inject;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.List;
 import java.util.Map;
-import java.util.function.BiConsumer;
 
 @JobCenter
 public class JobMain {
@@ -67,57 +64,110 @@ public class JobMain {
     /**
      * 定时1
      */
-    @Cron("0 20 13,15,17 * * ? ")
+    // @Cron("At::d::15:15")
+    // public String remind1() {
+    //     return remind();
+    // }
+    //
+    // /**
+    //  * 定时2
+    //  */
+    // @Cron("At::d::15:16")
+    // public String remind2() {
+    //     return remind();
+    // }
+    //
+    //
+    // /**
+    //  * 定时群消息 && 私信 推送
+    //  *
+    //  * @return
+    //  */
+    // public String remind() {
+    //     // 不需要发送私信的QQ数组
+    //     Long notPrivateStringQQ[] = {2586515115L};
+    //     // 群
+    //     String group = "1033480399";
+    //     val g = yuq.getGroups().get(Long.parseLong(group));
+    //     if (g == null) return "Error: Group Not Found!";
+    //     // 发送三遍
+    //     for (int i = 0; i < 3; i++) {
+    //         //TODO   QQ @全体成员每天有十次的限制，如果超过了10次，这段代码就会抛出异常而终止运行。
+    //         Message message = new Message().plus(mif.at(-1L).plus("现在是北京时间：" + new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date()) + "\n" +
+    //                 "请大家及时打卡上报体温哦！！！"));
+    //         g.sendMessage(message);
+    //     }
+    //
+    //     // 获取群组成员 && 私信
+    //     Map<Long, Member> members = yuq.getGroups().get(Long.parseLong(group)).getMembers();
+    //     members.forEach((Long id, Member member) -> {
+    //         val gr = yuq.getGroups().get(member.getGroup().getId());
+    //         if (gr == null) System.out.println("Error: Group Not Found!");
+    //         val m = gr.getMembers().get(id);
+    //         if (m == null) System.out.println("Error: Member Not Found!");
+    //         // 发送三遍
+    //         for (int i = 0; i < notPrivateStringQQ.length; i++) {
+    //             if (!notPrivateStringQQ[i].equals(id)) {
+    //                 for (int j = 0; j < 3; j++) {
+    //                     String msg = "现在是北京时间：" + new SimpleDateFormat("yyyy-MM-dd HH:mm").format(new Date()) + "\n" +
+    //                             "请您及时打卡上报体温哦！！！";
+    //                     m.sendMessage(new Message().plus(msg));
+    //                 }
+    //             }
+    //         }
+    //     });
+    //     return "OK!";
+    // }
+
+
+    /**
+     * 定时0
+     */
+    @Cron("At::d::15:25")
+    public String remind0() {
+        return remindGroup();
+    }
+
+    /**
+     * 定时1
+     */
+    @Cron("At::d::15:30")
     public String remind1() {
-        return remind();
+        return remindGroup();
     }
 
     /**
      * 定时2
      */
-    @Cron("0 30 13,15,17 * * ? ")
+    @Cron("At::d::16:03")
     public String remind2() {
-        return remind();
+        return remindGroup();
     }
 
+    /**
+     * 定时3
+     */
+    @Cron("At::d::16:29")
+    public String remind3() {
+        return remindGroup();
+    }
 
     /**
-     * 定时群消息 && 私信 推送
+     * 群提醒
      *
      * @return
      */
-    public String remind() {
-        // 不需要发送私信的QQ数组
-        Long notPrivateStringQQ[] = {2586515115L};
+    public String remindGroup() {
         // 群
-        String group = "1141137860";
+        String group = "1033480399";
         val g = yuq.getGroups().get(Long.parseLong(group));
         if (g == null) return "Error: Group Not Found!";
         // 发送三遍
         for (int i = 0; i < 3; i++) {
-            Message message = new Message().plus(mif.at(-1L).plus("现在是北京时间：" + new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date()) + "\n" +
-                    "请大家及时打卡上报体温哦！！！"));
+            Message message = new Message().plus("现在是北京时间：" + new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date()) + "\n" +
+                    "请大家及时打卡上报体温！！！");
             g.sendMessage(message);
         }
-
-        // 获取群组成员 && 私信
-        Map<Long, Member> members = yuq.getGroups().get(Long.parseLong(group)).getMembers();
-        members.forEach((Long id, Member member) -> {
-            val gr = yuq.getGroups().get(member.getGroup().getId());
-            if (gr == null) System.out.println("Error: Group Not Found!");
-            val m = gr.getMembers().get(id);
-            if (m == null) System.out.println("Error: Member Not Found!");
-            // 发送三遍
-            for (int i = 0; i < notPrivateStringQQ.length; i++) {
-                if (!notPrivateStringQQ[i].equals(id)) {
-                    for (int j = 0; j < 3; j++) {
-                        String msg = "现在是北京时间：" + new SimpleDateFormat("yyyy-MM-dd HH:mm").format(new Date()) + "\n" +
-                                "请您及时打卡上报体温哦！！！";
-                        m.sendMessage(new Message().plus(msg));
-                    }
-                }
-            }
-        });
         return "OK!";
     }
 
