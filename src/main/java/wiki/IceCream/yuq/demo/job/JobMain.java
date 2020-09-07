@@ -121,17 +121,9 @@ public class JobMain {
 
 
     /**
-     * 定时0
-     */
-    @Cron("At::d::15:25")
-    public String remind0() {
-        return remindGroup();
-    }
-
-    /**
      * 定时1
      */
-    @Cron("At::d::15:30")
+    @Cron("At::d::08:15")
     public String remind1() {
         return remindGroup();
     }
@@ -139,7 +131,7 @@ public class JobMain {
     /**
      * 定时2
      */
-    @Cron("At::d::16:03")
+    @Cron("At::d::09:20")
     public String remind2() {
         return remindGroup();
     }
@@ -147,7 +139,7 @@ public class JobMain {
     /**
      * 定时3
      */
-    @Cron("At::d::16:29")
+    @Cron("At::d::10:30")
     public String remind3() {
         return remindGroup();
     }
