@@ -141,6 +141,13 @@ public class GroupEvent {
                     "请修改群内备注为:市/县-姓名 如XXXX市-张三  \n" +
                     "项目进度相关问题可在群内提问。"));
 
+        } else if (event.getGroup().getId() == 584287663) { // 项目库
+            event.getGroup().sendMessage(new Message().plus("欢迎").plus(mif.at(event.getMember().getId())).plus("加入本群~~\n" +
+                    "请修改群内备注为:市/县-姓名 如XXXX市-张三  \n" +
+                    "粮食安全省长责任制考核相关问题可在群内提问。\n" +
+                    "使用系统前请先下载群文件中的操作手册阅读。\n" +
+                    "系统网址：http://172.10.8.2:8080/khxt/frameJsp.do"));
+
         } else { // 其他
             event.getGroup().sendMessage(new Message().plus("欢迎").plus(mif.at(event.getMember().getId())).plus("加入本群~~\n"));
         }
