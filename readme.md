@@ -2,6 +2,8 @@
 
 YuQ-Mirai 是一个依赖于 Mirai 的 YuQ API 的 QQ 机器人实现。
 
+##### 这个分支的依赖是目前最优的 DEV 版本的依赖包，如果想使用稳定版，请切换 master 分支。
+
 YuQ Framework 的目的就是让机器人开发变得更简单和更有效率。
 
 这并不是一个基础的演示 Demo。

@@ -6,6 +6,7 @@ import com.IceCreamQAQ.Yu.annotation.Path;
 import com.icecreamqaq.yuq.FunKt;
 import com.icecreamqaq.yuq.annotation.GroupController;
 import com.icecreamqaq.yuq.entity.Member;
+import com.icecreamqaq.yuq.message.Message;
 import lombok.val;
 import wiki.IceCream.yuq.demo.entity.QqGroup;
 import wiki.IceCream.yuq.demo.serivce.GroupService;
@@ -25,11 +26,12 @@ public class GroupAdminController {
     public QqGroup before(Member qq) {
         if (qq.isAdmin()) {
             val qqGroup = service.getGroupByGroupId(qq.getGroup().getId());
-            if (qqGroup == null) throw FunKt.toMessage("群信息不存在！请群主执行\"群 初始化信息\"命令！");
-            if (!qq.getGroup().getBot().isAdmin()) throw FunKt.toMessage("所有命令只有当机器人为管理员时生效！");
+            if (qqGroup == null) throw Message.Companion.toMessage("群信息不存在！请群主执行\"群 初始化信息\"命令！").toThrowable();
+            if (!qq.getGroup().getBot().isAdmin()) throw Message.Companion.toMessage("所有命令只有当机器人为管理员时生效！").toThrowable();
+
             return qqGroup;
         }
-        throw FunKt.toMessage("你没有使用该命令的权限！");
+        throw Message.Companion.toMessage("你没有使用该命令的权限！").toThrowable();
     }
 
     @Action("初始化信息")

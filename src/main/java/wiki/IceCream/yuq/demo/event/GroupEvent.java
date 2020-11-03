@@ -4,18 +4,17 @@ import com.IceCreamQAQ.Yu.annotation.Event;
 import com.IceCreamQAQ.Yu.annotation.EventListener;
 import com.IceCreamQAQ.Yu.cache.EhcacheHelp;
 import com.icecreamqaq.yuq.YuQ;
+import com.icecreamqaq.yuq.event.GroupMemberJoinEvent;
 import com.icecreamqaq.yuq.event.GroupMemberRequestEvent;
 import com.icecreamqaq.yuq.event.GroupMessageEvent;
 import com.icecreamqaq.yuq.event.GroupRecallEvent;
-import com.icecreamqaq.yuq.message.Image;
-import com.icecreamqaq.yuq.message.Message;
-import com.icecreamqaq.yuq.message.MessageItem;
-import com.icecreamqaq.yuq.message.MessageItemFactory;
+import com.icecreamqaq.yuq.message.*;
 import lombok.val;
 import wiki.IceCream.yuq.demo.serivce.GroupService;
 
 import javax.inject.Inject;
 import javax.inject.Named;
+import java.util.Objects;
 
 @EventListener
 public class GroupEvent {
@@ -62,7 +61,7 @@ public class GroupEvent {
         }
 
         if (group.getRecall()) {
-            saves.set(message.getId().toString(), message);
+            saves.set(Objects.requireNonNull(message.getId()).toString(), message);
         }
 
     }
