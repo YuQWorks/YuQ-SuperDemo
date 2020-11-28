@@ -16,11 +16,13 @@ import com.icecreamqaq.yuq.message.MessageItemFactory;
 import com.icecreamqaq.yuq.message.MessageSource;
 import com.icecreamqaq.yuq.mirai.message.MiraiMessageSource;
 import com.sun.corba.se.spi.transport.CorbaContactInfoListFactory;
+import com.icecreamqaq.yuq.message.*;
 import lombok.val;
 import wiki.IceCream.yuq.demo.serivce.GroupService;
 
 import javax.inject.Inject;
 import javax.inject.Named;
+import java.util.Objects;
 
 @EventListener
 public class GroupEvent {
@@ -72,7 +74,7 @@ public class GroupEvent {
         }
 
         if (group.getRecall()) {
-            saves.set(message.getId().toString(), message);
+            saves.set(Objects.requireNonNull(message.getId()).toString(), message);
         }
 
     }

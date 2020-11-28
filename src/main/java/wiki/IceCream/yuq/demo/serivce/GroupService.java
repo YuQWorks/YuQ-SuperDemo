@@ -13,8 +13,9 @@ public class GroupService {
 
     @Transactional
     public QqGroup getGroupByGroupId(long id){
-        return dao.getGroupByGroupId(id);
+        return dao.findByGroupId(id);
     }
+
     @Transactional
     public void save(QqGroup group){
         dao.save(group);

@@ -3,6 +3,8 @@ package wiki.IceCream.yuq.demo;
 import com.IceCreamQAQ.Yu.loader.AppClassloader;
 import com.icecreamqaq.yuq.mirai.YuQMiraiStart;
 
+import java.util.ArrayList;
+
 public class Start {
 
     /***
