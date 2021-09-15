@@ -8,13 +8,6 @@
     <artifactId>YuQ-SuperDemo</artifactId>
     <version>1.0-SNAPSHOT</version>
 
-    <parent>
-        <groupId>com.IceCreamQAQ.YuQ</groupId>
-        <artifactId>YuQ-Mirai-Starter</artifactId>
-        <version>0.0.1</version>
-    </parent>
-
-
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <encoding>UTF-8</encoding>
@@ -28,25 +21,25 @@
         <dependency>
             <groupId>com.IceCreamQAQ.YuQ</groupId>
             <artifactId>YuQ-Mirai</artifactId>
-            <version>0.1.0.0-DEV2</version>
+            <version>0.1.0.0-DEV19</version>
         </dependency>
 
         <dependency>
             <groupId>com.IceCreamQAQ.Yu</groupId>
             <artifactId>Yu-DB</artifactId>
-            <version>0.0.2.0-DEV2</version>
+            <version>0.0.2.0-DEV12</version>
         </dependency>
 
         <dependency>
             <groupId>com.IceCreamQAQ.Yu</groupId>
             <artifactId>WebCore</artifactId>
-            <version>0.0.2.0-DEV1</version>
+            <version>0.0.2.0-DEV14</version>
         </dependency>
 
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
-            <version>1.18.10</version>
+            <version>1.18.20</version>
             <scope>provided</scope>
         </dependency>
 

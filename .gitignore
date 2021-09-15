@@ -1,6 +1,6 @@
-/db/**
-/tmp/**
-/log/**
+/db
+/tmp
+/log
 device.json
 /src/main/resources/conf/dev/**
 .idea
